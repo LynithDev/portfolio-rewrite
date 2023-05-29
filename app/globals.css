@@ -2,26 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    *:focus-visible {
+        @apply outline-accent outline-2 outline outline-offset-2;
+    }
+
+    ::selection, ::-moz-selection {
+        @apply bg-accent/70 text-white;
+    }
+
+    
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@layer components {
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    .header.animate {
+        @apply transition-transform hover:translate-x-1;
+    }
+
+    .header.sm {
+        @apply font-bold md:text-2xl text-xl;
+    }
+
+    .header.md {
+        @apply font-bold md:text-4xl text-3xl;
+    }
+
+    .header.lg {
+        @apply font-medium md:text-6xl text-5xl text-accent;
+    }
+
+    .header.underline {
+        @apply no-underline relative;
+        @apply after:transition-all after:pointer-events-none after:absolute after:left-0 after:bottom-px after:w-4/5 after:h-2 after:bg-accent after:rounded-none after:bg-opacity-60 after:z-0;
+        @apply hover:after:w-full hover:after:h-0;
+    }
+
+    .header.underline.sm {
+        @apply after:h-1/5 after:bottom-1;
+        @apply hover:after:h-0.5;
+    }
+
+    .btn {
+        @apply leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-80;
+    }
+
 }
