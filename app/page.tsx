@@ -15,7 +15,7 @@ export default function Page() {
                     <p className="max-w-xs text-xl mt-sm">A developer, designer and Linux enthusiast from Poland.</p>
                     <ButtonGroup className="mt-sm">
                         <Button><HeartIcon className="flex-grow mr-xs w-5" /> Donate</Button>
-                        <Button><CodeBracketSquareIcon className="flex-grow mr-xs w-5" /> Projects</Button>
+                        <Button link="/#projects"><CodeBracketSquareIcon className="flex-grow mr-xs w-5" /> Projects</Button>
                     </ButtonGroup>
                 </Animate>
             </section>
@@ -29,6 +29,7 @@ export default function Page() {
             </section>
 
             {/* Projects :D */}
+            <a  id="projects" className="block relative -top-20 invisible"></a>
             <section className="w-screen md:p-xl p-md flex flex-row justify-center items-center bg-secondary dark:bg-secondary-dark ">
                 <Animate animations={["fade", "slide"]} className="max-w-content w-full flex flex-col justify-start items-start text-left rounded-xl">
                     <Header size="sm">My Projects</Header>

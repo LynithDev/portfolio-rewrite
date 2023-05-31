@@ -23,7 +23,7 @@ export default function ThemeSwitcher(props: ComponentProps<"button">) {
         document.documentElement.classList.toggle('dark', theme === 'dark');
     }, [theme]);
 
-    const icon = theme === 'light' ? <MoonIcon className="w-5" /> : <SunIcon className="w-5" />;
+    const icon = theme === 'light' ? <MoonIcon className="w-5 pointer-events-none" /> : <SunIcon className="w-5 pointer-events-none" />;
 
     return (
         <Button {...props as any} onClick={toggleTheme} buttonStyle={"invert"} className={`px-sm ${props.className}`}>

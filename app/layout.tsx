@@ -26,6 +26,16 @@ const outfit = Outfit({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <script dangerouslySetInnerHTML={{
+                    __html: `
+                        {
+                            const theme = window.localStorage.getItem('page-theme');
+                            document.documentElement.classList.toggle('dark', theme === 'dark');
+                        }  
+                    `
+                }}></script>
+            </head>
             <body className={`${outfit.variable} bg-primary dark:bg-primary-dark m-0 p-0 font-sans text-black dark:text-white`}>
                 <header>
                     <Navbar />

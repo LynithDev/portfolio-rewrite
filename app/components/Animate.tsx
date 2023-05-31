@@ -71,7 +71,7 @@ export function Animate(props: PropsWithChildren<AnimateProps & ComponentProps<"
             whileInView="animate"
             transition={{
                 duration: props.duration ?? 0.5,
-                delay: props.delay ?? 0.1,
+                delay: props.delay ?? 0,
                 ease: "backInOut"
             }}
             viewport={{
