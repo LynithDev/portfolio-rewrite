@@ -1,39 +1,21 @@
 import { InferGetServerSidePropsType } from "next";
 import { ComponentProps, ReactElement, cache, cloneElement } from "react";
-import Button from "../Button";
+import { Button } from "@components/base";
 import Image from "next/image";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { GitHubIcon } from "../Icon";
-import { Animate } from "../Animate";
-
-
-type ProjectProps = {
-    name: string,
-    description: string,
-    thumbnail: string,
-    link?: string,
-    repository?: string,
-    icons: ReactElement[],
-}
+import { GitHubIcon } from "@components/base/Icon";
+import { Animate } from "../base/Animate";
+import { Project, metadata } from "@/app/utils/metadata";
 
 async function getData() {
-    const projects = cache(async () => {
-        return (await fetch(
-            "https://raw.githubusercontent.com/LynithDev/meta-data/master/projects.json",
-            {
-                next: {
-                    revalidate: 60 * 60
-                }
-            }
-        )).json();
-    });
+    const data = await metadata();
 
     return {
-        projects: projects
+        ...data
     }
 }
 
-function ProjectCard(props: ProjectProps) {
+function ProjectCard(props: Project) {
     let description = props.description ?? "";
 
     if (description.length > 80) {
@@ -55,7 +37,9 @@ function ProjectCard(props: ProjectProps) {
                 <span className="ml-xs">{description}</span>
             </div>
             <div className="w-full flex flex-row justify-center items-center">
-                {props.repository && <Button link={props.repository} buttonStyle="invert" className="w-full mr-xxs"><GitHubIcon className="mr-xs" /> GitHub</Button>}
+                {props.repository && <Button link={props.repository} buttonStyle="invert" className="w-full mr-xxs">
+                    <GitHubIcon className="mr-xs" /> GitHub    
+                </Button>}
                 <Button link={props.link} buttonStyle="invert" className="w-full ml-xxs first:m-0"><ArrowTopRightOnSquareIcon className="w-4 mr-xs stroke-2" />Open</Button>
             </div>
         </Animate>
@@ -63,7 +47,7 @@ function ProjectCard(props: ProjectProps) {
 }
 
 export async function Projects(props: ComponentProps<"div">) {
-    const data = (await (await getData()).projects());
+    const data = await getData();
 
     const icons: {
         [key: string]: string
@@ -75,7 +59,7 @@ export async function Projects(props: ComponentProps<"div">) {
         })
     });
 
-    const projects: ProjectProps[] = data.projects;
+    const projects: Project[] = data.projects;
 
     return (
         <div {...props} className={`flex flex-row flex-wrap max-w-5xl w-full ${props.className}`}>
@@ -83,7 +67,7 @@ export async function Projects(props: ComponentProps<"div">) {
                 const svgIcons = iconCache().filter((icon) => project.icons.includes(icon.key as any));
 
                 return (
-                    <ProjectCard key={key} {...project} icons={svgIcons} />
+                    <ProjectCard key={key} {...project} icons={svgIcons as any} />
                 )})}
         </div>
     )

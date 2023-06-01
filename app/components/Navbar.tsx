@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ComponentProps, HTMLProps, ReactElement, useEffect, useRef } from "react";
-import Button from "./Button";
+import Button from "./base/Button";
 import { CurrencyDollarIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Animate } from "./Animate";
+import { Animate } from "./base/Animate";
 
 const links: [string, string][] = [
     ["Home", "/"],
@@ -17,7 +17,12 @@ const links: [string, string][] = [
 
 function NavbarLink({ href, name }: { href: string, name: string }) {
     const pathname = usePathname();
-    const active = pathname === href ? "text-accent" : "";
+    // const active = pathname === href ? "text-accent" : "";
+
+    let active;
+
+    if (pathname === href) active = "text-accent";
+    else if (pathname.startsWith(href) && pathname != "/" && href != "/") active = "text-accent";
 
     return (
         <Link href={href} scroll={false} className={`${active} md:text-base text-xl p-sm m-sm hover:text-accent/90`}>{name}</Link>
@@ -52,7 +57,7 @@ export default function Navbar() {
             <div className="fixed left-2 top-2 md:hidden flex p-sm z-50 bg-primary dark:bg-primary-dark rounded-md" onClick={showNavbar}>
                 <Bars3BottomLeftIcon className="w-5 h-5" />
             </div>
-            <nav ref={navbarRef} className="transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
+            <nav ref={navbarRef} className="md:px-md lg:px-0 transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
                 <Animate animations={["fade"]} className="max-w-content flex-1 flex md:flex-row flex-col md:px-0 px-md py-md">
                     <div className="flex flex-row flex-1 justify-end items-center">
                         {/* Placeholder element so the links can be centered lmfao */}
@@ -66,7 +71,7 @@ export default function Navbar() {
 
                     <div className="flex md:flex-row flex-col flex-1 justify-end md:items-center items-start">
                         <ThemeSwitcher className="mr-xs" />
-                        <Button className="md:mt-0 mt-sm" link=""><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
+                        <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
                     </div>
                 </Animate>
             </nav>

@@ -5,13 +5,15 @@ import { ComponentProps, createElement } from "react"
 type HeaderProps = {
     size?: 'sm' | 'md' | 'lg',
     animate?: boolean,
+    underline?: boolean
 }
 
 export default function Header(props: ComponentProps<"h1"> & HeaderProps) {
-    let { size, animate, children, ...rest } = props;
+    let { size, animate, underline, children, ...rest } = props;
 
     size ??= 'md';
     animate ??= true;
+    underline ??= true;
 
     const level = {
         sm: 3,
@@ -20,8 +22,8 @@ export default function Header(props: ComponentProps<"h1"> & HeaderProps) {
     }[size];
 
     const levelClasses = {
-        sm: "sm underline",
-        md: "md underline",
+        sm: "sm" + (underline ? " cool-underline" : ""),
+        md: "md" + (underline ? " cool-underline" : ""),
         lg: "lg"
     }[size];
 

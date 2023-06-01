@@ -9,6 +9,12 @@
         scroll-behavior: smooth !important;
     }
 
+    body {
+        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: overlay;
+    }
+
     *:focus-visible {
         @apply outline-accent outline-2 outline outline-offset-2;
     }
@@ -38,19 +44,27 @@
         @apply font-medium md:text-6xl text-5xl text-accent;
     }
 
-    .header.underline {
+    .cool-underline {
         @apply no-underline relative;
         @apply after:transition-all after:pointer-events-none after:absolute after:left-0 after:bottom-px after:w-4/5 after:h-2 after:bg-accent after:rounded-none after:bg-opacity-60 after:z-0;
         @apply hover:after:w-full hover:after:h-0;
     }
 
-    .header.underline.sm {
+    .header.cool-underline.sm {
         @apply after:h-1/5 after:bottom-1;
         @apply hover:after:h-0.5;
     }
 
     .btn {
         @apply leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-80;
+    }
+
+    .link {
+        @apply transition-transform no-underline text-accent hover:text-white hover:cursor-pointer hover:translate-x-0.5;
+    }
+
+    .link.cool-underline {
+        @apply after:h-px after:bottom-0.5 after:rounded-none;
     }
 
 }

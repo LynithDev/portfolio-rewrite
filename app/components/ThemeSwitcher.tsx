@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentProps, useEffect, useState } from "react";
-import Button from "./Button";
+import Button from "./base/Button";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export default function ThemeSwitcher(props: ComponentProps<"button">) {
@@ -26,7 +26,7 @@ export default function ThemeSwitcher(props: ComponentProps<"button">) {
     const icon = theme === 'light' ? <MoonIcon className="w-5 pointer-events-none" /> : <SunIcon className="w-5 pointer-events-none" />;
 
     return (
-        <Button {...props as any} onClick={toggleTheme} buttonStyle={"invert"} className={`px-sm ${props.className}`}>
+        <Button {...props as any} onClick={toggleTheme} aria-label="Switch Theme" buttonStyle={"invert"} className={`px-sm ${props.className}`}>
             {icon}
         </Button>
     )
