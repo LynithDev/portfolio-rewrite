@@ -1,8 +1,6 @@
-import Link from "next/link";
-import Header from "./base/Header";
 import { PropsWithChildren, cache } from "react";
-import HyperLink from "./base/HyperLink";
-import { metadata } from "../utils/metadata";
+import { Header, HyperLink} from "@components/base";
+import { metadata } from "@utils/metadata";
 
 async function getData() {
     const data = await metadata();

@@ -1,4 +1,4 @@
-import { Animate, Header, HyperLink } from "./components/base";
+import { Animate, Header, HyperLink } from "@components/base";
 
 export default function NotFoundPage() {
     const messages = [
