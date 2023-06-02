@@ -1,21 +1,23 @@
-import { getBlogData } from "@/utils/blog"
+import { getBlogData, getBlogs } from "@/utils/blog"
 
 async function getData() {
-    const data = await getBlogData();
+    const data = await getBlogs();
+
+    console.log(data);
 
     return {
-        ...data
+        ...data[0]
     }
 }
 
 export default async function BlogPage() {
-    const data = await getData();
-
-    console.log(data.title)
+    const data = await getBlogData(await getData());
     
     return (
-        <section className="h-screen flex flex-col justify-center items-center">
-            {data.reactProcess}
+        <section className="min-h-screen flex flex-col justify-center items-center">
+            <div className="max-w-content md:mx-0 mx-md flex flex-col mt-half-page mb-xl justify-start items-start gap-3">
+                {data.content}
+            </div>
         </section>
     )
 }

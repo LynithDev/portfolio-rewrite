@@ -40,7 +40,10 @@ module.exports = {
             sans: ["var(--font-outfit)"],
         },
         extend: {
-            margin: spacing(),
+            margin: {
+                ...spacing(),
+                "half-page": "calc(50vh - 50px)",
+            },
             padding: spacing(),
 
             maxWidth: width(),

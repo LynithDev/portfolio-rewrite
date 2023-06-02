@@ -51,7 +51,7 @@
     }
 
     .header.cool-underline.sm {
-        @apply after:h-1/5 after:bottom-1;
+        @apply after:h-1/6 after:bottom-1;
         @apply hover:after:h-0.5;
     }
 

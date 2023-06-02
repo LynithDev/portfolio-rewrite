@@ -17,9 +17,8 @@ const links: [string, string][] = [
 
 function NavbarLink({ href, name }: { href: string, name: string }) {
     const pathname = usePathname();
-    // const active = pathname === href ? "text-accent" : "";
 
-    let active;
+    let active = "";
 
     if (pathname === href) active = "text-accent";
     else if (pathname.startsWith(href) && pathname != "/" && href != "/") active = "text-accent";
@@ -31,11 +30,13 @@ function NavbarLink({ href, name }: { href: string, name: string }) {
 
 export default function Navbar() {
     const navbarRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
 
     const clickListener = (event: MouseEvent) => {
         if (navbarRef.current?.contains(event.target as Node)) return;
 
         preventScroll(false);
+        toggleOverlay(false)
         navbarRef.current?.classList.add("-translate-x-full");
         document.removeEventListener("click", clickListener);
     }
@@ -46,8 +47,16 @@ export default function Navbar() {
         document.body.classList.toggle(classname, state)
     }
 
+    const toggleOverlay = (force?: boolean) => {
+        force ??= !navbarRef.current?.classList.contains("-translate-x-full");
+
+        const overlay = overlayRef?.current;
+        overlay?.classList.toggle("hidden", !force)
+    }
+
     const showNavbar = () => {
         preventScroll(true);
+        toggleOverlay(true);
         navbarRef.current?.classList.remove("-translate-x-full");
         document.addEventListener("click", clickListener);
     }
@@ -56,6 +65,9 @@ export default function Navbar() {
         <>
             <div className="fixed left-2 top-2 md:hidden flex p-sm z-50 bg-primary dark:bg-primary-dark rounded-md" onClick={showNavbar}>
                 <Bars3BottomLeftIcon className="w-5 h-5" />
+            </div>
+            <div ref={overlayRef} className="fixed left-0 top-0 w-screen h-screen bg-black bg-opacity-50 z-40 hidden">
+                
             </div>
             <nav ref={navbarRef} className="md:px-md lg:px-0 transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
                 <Animate animations={["fade"]} className="max-w-content flex-1 flex md:flex-row flex-col md:px-0 px-md py-md">
