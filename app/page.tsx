@@ -1,6 +1,7 @@
 import { CodeBracketIcon, CodeBracketSquareIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { Button, Header, ButtonGroup, Animate } from "@components/base";
 import { Projects } from "@components/pages/Projects";
+import { metadata } from "@/utils/metadata";
 
 const skills = [
     "React", "TypeScript", "NextJS", "Rust", "Java", "JavaScript", 
@@ -8,7 +9,9 @@ const skills = [
     "NodeJS", "MongoDB", "SQL", "Git"
 ]
 
-export default function Page() {
+export default async function Page() {
+    const socials = (await metadata()).socials;
+
     return (
         <>
             {/* Intro Section */}
@@ -17,7 +20,7 @@ export default function Page() {
                     <Header animate={false} size="lg" className="text-7xl">Lynith</Header>
                     <p className="max-w-xs text-xl mt-sm">A developer, designer and Linux enthusiast from Poland.</p>
                     <ButtonGroup className="mt-sm">
-                        <Button><HeartIcon className="flex-grow mr-xs w-5" /> Donate</Button>
+                        <Button link={`https://ko-fi.com/${socials.kofi}`}><HeartIcon className="flex-grow mr-xs w-5" /> Donate</Button>
                         <Button link="/#projects"><CodeBracketSquareIcon className="flex-grow mr-xs w-5" /> Projects</Button>
                     </ButtonGroup>
                 </Animate>

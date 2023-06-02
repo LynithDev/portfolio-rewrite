@@ -1,11 +1,7 @@
+import { GenerateMetadataProps } from "@/types/GenerateMetadataProps";
 import { Metadata } from "next"
 
-type Props = {
-    params: { id: string };
-    searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
 
     const getValue = (k: string) => {
         const key: string | string[] | undefined = props.searchParams[k];

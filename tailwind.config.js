@@ -43,11 +43,15 @@ module.exports = {
             margin: {
                 ...spacing(),
                 "half-page": "calc(50vh - 50px)",
+                "navbar": "104px"
             },
             padding: spacing(),
 
             maxWidth: width(),
             width: width(),
+            maxHeight: {
+                "navbar": "104px"
+            },
 
             transitionProperty: {
                 "width": "width",

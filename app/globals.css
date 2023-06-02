@@ -60,7 +60,7 @@
     }
 
     .link {
-        @apply transition-transform no-underline text-accent hover:text-white hover:cursor-pointer hover:translate-x-0.5;
+        @apply transition-transform no-underline text-accent hover:text-opacity-60 hover:cursor-pointer hover:translate-x-0.5;
     }
 
     .link.cool-underline {

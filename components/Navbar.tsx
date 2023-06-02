@@ -69,7 +69,7 @@ export default function Navbar() {
             <div ref={overlayRef} className="fixed left-0 top-0 w-screen h-screen bg-black bg-opacity-50 z-40 hidden">
                 
             </div>
-            <nav ref={navbarRef} className="md:px-md lg:px-0 transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
+            <nav ref={navbarRef} className="md:max-h-navbar md:px-md lg:px-0 transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
                 <Animate animations={["fade"]} className="max-w-content flex-1 flex md:flex-row flex-col md:px-0 px-md py-md">
                     <div className="flex flex-row flex-1 justify-end items-center">
                         {/* Placeholder element so the links can be centered lmfao */}
@@ -83,7 +83,7 @@ export default function Navbar() {
 
                     <div className="flex md:flex-row flex-col flex-1 justify-end md:items-center items-start">
                         <ThemeSwitcher className="mr-xs" />
-                        <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
+                        <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/lynith"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
                     </div>
                 </Animate>
             </nav>

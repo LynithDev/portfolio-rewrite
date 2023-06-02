@@ -1,6 +1,7 @@
 import { PropsWithChildren, cache } from "react";
 import { Header, HyperLink} from "@components/base";
 import { metadata } from "@utils/metadata";
+import Link from "next/link";
 
 async function getData() {
     const data = await metadata();
@@ -33,20 +34,30 @@ export default async function Footer() {
     ]
 
     return (
-        <footer className=" bg-secondary-dark p-xl text-white">
-            <div className="max-w-content mx-auto flex flex-col md:flex-row md:justify-between justify-center md:items-start items-center">
-                <FooterColumn header="Socials">
-                    {socials.map((social, index) => (
-                        <HyperLink href={social[1]} key={index}>{social[0]}</HyperLink>
-                    ))}
-                </FooterColumn>
+        <footer className="bg-secondary-dark">
+            <div className="bg-secondary-dark p-xl text-white">
+                <div className="max-w-content mx-auto flex flex-col md:flex-row md:justify-between justify-center md:items-start items-center">
+                    <FooterColumn header="Socials">
+                        {socials.map((social, index) => (
+                            <HyperLink href={social[1]} key={index}>{social[0]}</HyperLink>
+                        ))}
+                    </FooterColumn>
 
-                <FooterColumn header="Links">
-                    <HyperLink href="/">Home</HyperLink>
-                    <HyperLink href="/#projects">Projects</HyperLink>
-                    <HyperLink href="/blog">Blog</HyperLink>
-                </FooterColumn>
+                    <FooterColumn header="Links">
+                        <HyperLink href="/">Home</HyperLink>
+                        <HyperLink href="/#projects">Projects</HyperLink>
+                        <HyperLink href="/blog">Blog</HyperLink>
+                    </FooterColumn>
+                </div>
             </div>
+            
+            {process.env.WEBSITE_SOURCE_CODE && (
+                <div className="bg-black/50 p-md text-white">
+                    <div className="max-w-content mx-auto flex flex-col md:flex-row justify-center items-center">
+                        <p className="opacity-80">This website is open source. Check it out <HyperLink href={process.env.WEBSITE_SOURCE_CODE}>here</HyperLink></p>
+                    </div>
+                </div>
+            )}
         </footer>
     )
 }

@@ -13,6 +13,7 @@ import rehypeFormat from "rehype-format";
 
 import mongo from "@utils/mongo";
 import { BlogPost } from "@/types/BlogPost";
+import { WithId } from "mongodb";
 
 const getAsReactNode = async (markdown: string) => {
     const processedContent = await unified()
@@ -28,7 +29,12 @@ const getAsReactNode = async (markdown: string) => {
             createElement: React.createElement,
             Fragment: React.Fragment,
             components: {
-                h1: (props: any) => <Header underline={false} animate={false} size="lg" className="mt-md" {...props} />,
+                h1: (props: any) => (
+                    <>
+                    <Header underline={false} animate={false} size="lg" className="mt-md" {...props} />
+                    <span className="w-full h-px bg-black dark:bg-white bg-opacity-20"></span>
+                    </>
+                ),
                 h2: (props: any) => <Header underline={false} size="md" className="mt-md" {...props} />,
                 h3: (props: any) => <Header underline={false} size="sm" className="mt-md" {...props} />,
                 a: HyperLink
@@ -42,9 +48,14 @@ const getAsReactNode = async (markdown: string) => {
 type BlogFilters = {
     tags?: string[];
     title?: string;
+    slug?: string;
     from?: number;
     to?: number;
     author?: string;
+}
+
+export const convertTitleToURLFormat = (title: string): string => {
+    return title.toLowerCase().replaceAll(" ", "-");
 }
 
 export const getBlogs = async (filters?: BlogFilters) => {
@@ -54,17 +65,15 @@ export const getBlogs = async (filters?: BlogFilters) => {
 
     const { from, to, ...rest } = filters ?? {};
 
-    const documents = await blog.find({
-        $where: function() {
-            const _from = (from ?? 0) <= this.date;
-            const _to = (to ?? this.date) >= this.date;
-
-            return _from && _to;
+    const document = await blog.find({
+        date: {
+            $gte: from ?? 0,
+            $lte: to ?? Date.now()
         },
         ...rest
     }).toArray();
 
-    return documents;
+    return document as WithId<BlogPost>[] | null;
 }
 
 export const getBlogData = async (blog: BlogPost) => {
@@ -75,6 +84,7 @@ export const getBlogData = async (blog: BlogPost) => {
     const reactNode = await getAsReactNode(matterResult.content);
 
     return {
+        matter: matterResult.data,
         ...rest,
         content: reactNode,
     }
