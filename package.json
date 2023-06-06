@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    
     "setup:populate": "node ./scripts/populate_blog.js"
   },
   "dependencies": {
@@ -25,6 +24,7 @@
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "redis": "^4.6.7",
     "rehype-format": "^4.0.1",
     "rehype-parse": "^8.0.4",
     "rehype-react": "^7.2.0",

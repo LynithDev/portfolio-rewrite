@@ -1,11 +1,16 @@
 import { Animate, Button, Header } from "@/components/base";
+import BlogPost from "@/types/BlogPost";
 import { GenerateMetadataProps } from "@/types/GenerateMetadataProps";
-import { convertTitleToURLFormat, getBlogData, getBlogs } from "@/utils/blog";
+import { convertTitleToURLFormat, getBlogData, getBlogs, updateBlogPost } from "@/utils/blog";
+import { get } from "@/utils/redis";
 import { pluralize } from "@/utils/strings";
 import { EyeIcon } from "@heroicons/react/24/solid";
+import { ObjectId, WithId } from "mongodb";
 import { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import crypto from "crypto";
 
 type PageParams = {
     year: string;
@@ -53,6 +58,21 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
     }
 }
 
+async function updateViewCount(blog: ObjectId, views?: number) {
+    await get("blog-views");
+
+    const ip = headers().get("x-forwarded-for");
+    if (!ip) {
+        return;
+    }
+
+    crypto.createHash("sha256").update(ip).digest("hex");
+
+    return updateBlogPost(blog, {
+        views: (views ?? 0) + 1
+    });
+} 
+
 export default async function BlogPage({ params }: { params: PageParams }) {
     const { year, month, day, title } = params;
 
@@ -78,6 +98,8 @@ export default async function BlogPage({ params }: { params: PageParams }) {
 
     const views = post.views ?? 0;
     const viewText = pluralize(views, "view");
+
+    updateViewCount(post._id, views);
 
     return (
         <section className="min-h-screen lg:mx-0 mx-md flex flex-col justify-start items-center mt-navbar">

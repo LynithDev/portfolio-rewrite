@@ -13,7 +13,7 @@ import rehypeFormat from "rehype-format";
 
 import mongo from "@utils/mongo";
 import { BlogPost } from "@/types/BlogPost";
-import { WithId } from "mongodb";
+import { ObjectId, WithId } from "mongodb";
 
 const getAsReactNode = async (markdown: string) => {
     const processedContent = await unified()
@@ -76,7 +76,7 @@ export const getBlogs = async (filters?: BlogFilters) => {
     return document as WithId<BlogPost>[] | null;
 }
 
-export const getBlogData = async (blog: BlogPost) => {
+export const getBlogData = async (blog: WithId<BlogPost>) => {
 
     const { content, ...rest } = blog;
 
@@ -88,4 +88,14 @@ export const getBlogData = async (blog: BlogPost) => {
         ...rest,
         content: reactNode,
     }
+}
+
+export const updateBlogPost = (id: ObjectId, update: Partial<BlogPost>) => {
+    if (!mongo.isConnected()) mongo.connect();
+
+    const blog = mongo.database().collection<BlogPost>("blogs").findOneAndUpdate({
+        _id: id
+    }, {
+        $set: update
+    });
 }

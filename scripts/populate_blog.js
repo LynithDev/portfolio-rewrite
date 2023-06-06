@@ -10,6 +10,7 @@ const blogs = [
         thumbnail: "https://raw.githubusercontent.com/LynithDev/meta-data/master/assets/previews/gnome-app-hider.jpg",
         author: "Lynith",
         date: new Date().getTime(),
+        views: 0,
         tags: ["Blog Post", "lol"]
     },
     {
@@ -20,6 +21,7 @@ const blogs = [
         thumbnail: "https://raw.githubusercontent.com/LynithDev/meta-data/master/assets/previews/gnome-app-hider.jpg",
         author: "Lynith",
         date: new Date().getTime(),
+        views: 0,
         tags: ["Blog Post", "lol"]
     },
     {
@@ -30,6 +32,7 @@ const blogs = [
         thumbnail: "https://raw.githubusercontent.com/LynithDev/meta-data/master/assets/previews/gnome-app-hider.jpg",
         author: "Lynith",
         date: new Date().getTime(),
+        views: 0,
         tags: ["Blog Post", "lol"]
     }
 ]
