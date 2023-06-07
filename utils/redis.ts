@@ -1,34 +1,31 @@
-import { createCluster } from "redis";
+import { RedisClientType, createClient, createCluster } from "redis";
 
-const cluster = createCluster({
-    rootNodes: [
-        {
-            url: process.env.REDIS_URL
-        }
-    ]
-});
+let cluster: RedisClientType | null = null;
+let connected = false;
 
-cluster.on("error", (err) => {
-    console.error("Redis error: ", err);
-});
+export const connect = async () => {
+    if (connected) return cluster;
+    cluster = createClient({
+        url: process.env.REDIS_URL,
+    });
+    await cluster.connect();
+    connected = cluster != null;
+    console.log("Connected to Redis");
+}
+
+export const disconnect = async () => {
+    if (!connected) return;
+    await cluster?.quit();
+    cluster = null;
+    connected = false;
+}
+
+export const getCluster = () => cluster;
 
 const redis = {
-    connected: () => cluster.isOpen,
-    get: cluster.get,
-    set: cluster.set,
-    del: cluster.del,
-    exists: cluster.exists,
-    connect: cluster.connect,
-    disconnect: cluster.disconnect,
-    quit: cluster.quit,
-
-    cluster
+    connect,
+    disconnect,
+    getCluster,
 }
 
-export const get = async (key: string) => {
-    // if (!redis.connected()) {
-    //     await redis.connect();
-    // }
-
-    return await redis.get(key);
-}
+export default redis;
