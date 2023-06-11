@@ -4,22 +4,35 @@ import { Header, HyperLink } from "@components/base";
 import React from "react";
 
 import { unified } from "unified";
-import rehypeParse from "rehype-parse";
-import remarkRehype from 'remark-rehype'
-import rehypeReact from 'rehype-react'
+
 import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from 'remark-rehype'
+import remarkEmoji from "remark-emoji";
+import remarkBreaks from "remark-breaks";
+
+import rehypeParse from "rehype-parse";
+import rehypeReact from 'rehype-react'
+import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import rehypeFormat from "rehype-format";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 
 import mongo from "@utils/mongo";
 import { BlogPost } from "@/types/BlogPost";
 import { ObjectId, WithId } from "mongodb";
+import "@/public/atom.min.css";
 
 const getAsReactNode = async (markdown: string) => {
     const processedContent = await unified()
         .use(remarkParse)
+        .use(remarkEmoji)
+        .use(remarkGfm)
+        .use(remarkBreaks)
         .use(remarkRehype)
         .use(rehypeFormat)
+        .use(rehypeHighlight)
         .use(rehypeStringify)
         .process(markdown);
 
@@ -37,10 +50,30 @@ const getAsReactNode = async (markdown: string) => {
                 ),
                 h2: (props: any) => <Header underline={false} size="md" className="mt-md" {...props} />,
                 h3: (props: any) => <Header underline={false} size="sm" className="mt-md" {...props} />,
-                a: HyperLink
+                a: HyperLink,
+                code: (props: HTMLDivElement | any) => {
+                    const { className } = props;
+                    let language;
+                    if (className) {
+                        language = className.split(" ").find((className: string) => className.startsWith("language-"))?.split("-")[1];
+                        language = language ? language.toUpperCase() : "text";
+                    }
+
+                    return (
+                        <>
+                            {language ? <span>{language}</span> : <></>}
+                            <code {...props} />
+                        </>
+                    )
+                },
+                table: (props: any) => (
+                    <div className="max-w-content w-full overflow-x-auto">
+                        <table {...props} />
+                    </div>
+                )
             }
         })
-    .process(processedContent.toString());
+        .process(processedContent.toString());
 
     return reactProcess.result;
 }

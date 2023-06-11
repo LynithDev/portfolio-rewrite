@@ -3,8 +3,23 @@
 import { ComponentProps, useEffect, useState } from "react";
 import Button from "./base/Button";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import Head from "next/head";
 
 export default function ThemeSwitcher(props: ComponentProps<"button">) {
+    const { theme, setTheme } = useTheme();
+
+    const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
+    const icon = theme === 'light' ? <MoonIcon className="w-5 pointer-events-none" /> : <SunIcon className="w-5 pointer-events-none" />;
+
+    return (
+        <Button {...props as any} onClick={toggleTheme} aria-label="Switch Theme" buttonStyle={"invert"} className={`px-sm ${props.className}`}>
+            {icon}
+        </Button>
+    )
+}
+
+export function useTheme() {
     const [theme, setTheme] = useState('light');
     const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -23,11 +38,5 @@ export default function ThemeSwitcher(props: ComponentProps<"button">) {
         document.documentElement.classList.toggle('dark', theme === 'dark');
     }, [theme]);
 
-    const icon = theme === 'light' ? <MoonIcon className="w-5 pointer-events-none" /> : <SunIcon className="w-5 pointer-events-none" />;
-
-    return (
-        <Button {...props as any} onClick={toggleTheme} aria-label="Switch Theme" buttonStyle={"invert"} className={`px-sm ${props.className}`}>
-            {icon}
-        </Button>
-    )
+    return { theme, setTheme };
 }

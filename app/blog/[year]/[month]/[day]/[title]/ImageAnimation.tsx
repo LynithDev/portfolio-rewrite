@@ -2,11 +2,12 @@
 
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Image from "next/image";
-import { PropsWithChildren, useRef, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
 export function AnimatedImage({ src, alt }: { src: string, alt: string }) {
     const { scrollYProgress } = useScroll();
     const [scrollY, setScrollY] = useState(scrollYProgress.get());
+    const [multiplier, setMultiplier] = useState(0);
 
     const imageRef = useRef<HTMLImageElement>(null);
 
@@ -14,14 +15,15 @@ export function AnimatedImage({ src, alt }: { src: string, alt: string }) {
         setScrollY(progress);
     });
 
-    const multiplier = window.innerWidth > window.innerHeight 
-        ? window.innerHeight / 200 // For landscape
-        : window.innerWidth / 40; // For portrait
+    useEffect(() => {
+        setMultiplier(window.innerWidth > window.innerHeight 
+        ? window.innerHeight / 500 // For landscape
+        : window.innerWidth / 40); // For portrait
+    }, []);
 
     return (
         <motion.div
             style={{
-                scaleX: 1 + scrollY * 1.5,
                 opacity: 1 - scrollY * multiplier,
             }}
         >

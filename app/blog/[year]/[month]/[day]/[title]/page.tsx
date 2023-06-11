@@ -12,6 +12,8 @@ import { headers } from "next/headers";
 import redis from "@/utils/redis";
 import crypto from "crypto";
 import { AnimatedImage } from "./ImageAnimation";
+import Head from "next/head";
+import { useTheme } from "@/components/ThemeSwitcher";
 
 type PageParams = {
     year: string;

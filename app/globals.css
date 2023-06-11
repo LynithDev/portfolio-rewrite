@@ -23,6 +23,41 @@
         @apply bg-accent/70 text-white;
     }
 
+    pre {
+        @apply w-full whitespace-pre-wrap bg-secondary dark:bg-secondary-dark p-sm py-xs rounded-lg;
+    }
+
+    table {
+        @apply max-w-content block overflow-x-auto border-spacing-0 border-separate;
+    }
+
+    th {
+        @apply first:rounded-tl-lg last:rounded-tr-lg;
+        @apply border border-secondary dark:border-secondary-dark;
+        @apply bg-secondary dark:bg-secondary-dark;
+        @apply font-medium text-left text-black dark:text-white px-sm py-xs whitespace-nowrap;
+    }
+
+    td {
+        @apply first:border-l border-r border-b border-secondary dark:border-secondary-dark;
+        @apply text-left text-black dark:text-white px-sm py-xs  whitespace-nowrap;
+    }
+    
+    tr:last-child td {
+        @apply first:rounded-bl-lg last:rounded-br-lg;
+    }
+
+    code {
+        @apply bg-secondary dark:bg-secondary-dark rounded-sm px-xxs py-xxs whitespace-pre;
+    }
+
+    ul li {
+        @apply list-disc list-inside dark:marker:text-white/50 marker:text-black/50;
+    }
+
+    ol li {
+        @apply list-decimal list-inside dark:marker:text-white/50 marker:text-black/50;
+    }
     
 }
 
@@ -67,4 +102,8 @@
         @apply after:h-px after:bottom-0.5 after:rounded-none;
     }
 
+}
+
+.task-list-item {
+    list-style-type: none;
 }

@@ -1,6 +1,16 @@
 # My personal website
 Made with ✨ NextJS and TailwindCSS ✨
 
+<h3><details>
+
+<summary>Screenshots</summary>
+
+![Website Preview](./.github/screenshot.png)
+
+![Website Preview](./.github/screenshot2.png)
+
+</details></h3>
+
 ## 🚀 Getting Started
 If using npm:
 ```bash
