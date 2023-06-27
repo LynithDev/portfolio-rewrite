@@ -6,7 +6,10 @@ services:
     build: .
     ports:
       - 3000:3000
-    external_links:
+    networks:
+      default:
+        ipv4_address: ${APP_IP}
+    depends_on:
       - mongo
       - redis
   mongo:
@@ -15,9 +18,20 @@ services:
     restart: always
     ports:
       - 27017:27017
+    networks:
+      default:
+        ipv4_address: ${MONGO_IP}
   redis:
     container_name: redis
     image: redis
     restart: always
     ports:
       - 6379:6379
+    networks:
+      default:
+        ipv4_address: ${REDIS_IP}
+        
+networks:
+  default:
+    external: true
+    name: Minimalistic Portfolio
