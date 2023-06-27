@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    container_name: minimalistic-portfolio
+    restart: always
+    build: .
+    ports:
+      - 3000:3000
+    external_links:
+      - mongo
+      - redis
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
