@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-COPY .env.docker ./.env
+COPY .env ./.env
 
 EXPOSE 3000
 
