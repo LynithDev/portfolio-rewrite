@@ -7,14 +7,22 @@ const client = new MongoClient(URI);
 let _isConnected = false;
 
 export async function connect() {
-    const timeout = setTimeout(() => {
-        throw new Error('Failed to connect to database');
-    }, 10 * 1000);
+    // const timeout = setTimeout(() => {
+    //     throw new Error('Failed to connect to database');
+    // }, 10 * 1000);
 
-    await client.connect();
-    _isConnected = true;
-    console.log("Connected to MongoDB");
-    clearTimeout(timeout);
+    // await client.connect();
+    // _isConnected = true;
+    // console.log("Connected to MongoDB");
+    // clearTimeout(timeout);
+
+    client.connect().then(() => {
+        _isConnected = true;
+        console.log("Connected to MongoDB");
+    }).catch((err) => {
+        console.log(err);
+        throw new Error('Failed to connect to database');
+    });
 }
 
 export async function close() {
