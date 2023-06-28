@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@` +
-    `${process.env.MONGO_IP}/`;
+const URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}/`
 
 const client = new MongoClient(URI);
 let _isConnected = false;
@@ -21,7 +20,8 @@ export async function connect() {
         console.log("Connected to MongoDB");
     }).catch((err) => {
         console.log(err);
-        throw new Error('Failed to connect to database');
+        console.error("Failed to connect to MongoDB");
+        process.exit(1);
     });
 }
 
