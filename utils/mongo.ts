@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient(process.env.MONGO_URL as string);
+const URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@` +
+    `${process.env.MONGO_IP}/${process.env.MONGO_DB}`;
+
+const client = new MongoClient(URI);
 let _isConnected = false;
 
 export async function connect() {
