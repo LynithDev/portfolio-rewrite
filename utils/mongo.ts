@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@` +
+const URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@` +
     `${process.env.MONGO_IP}/${process.env.MONGO_DB}`;
 
 const client = new MongoClient(URI);
