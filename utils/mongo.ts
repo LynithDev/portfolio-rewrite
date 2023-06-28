@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@` +
-    `${process.env.MONGO_IP}/${process.env.MONGO_DB}`;
+    `${process.env.MONGO_IP}/`;
 
 const client = new MongoClient(URI);
 let _isConnected = false;
