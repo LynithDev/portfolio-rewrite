@@ -16,6 +16,8 @@ services:
     container_name: mongo
     image: mongo
     restart: always
+    volumes:
+      - ./MongoDB:/data/db
     ports:
       - 27017:27017
     networks:
@@ -29,6 +31,8 @@ services:
     container_name: redis
     image: redis
     restart: always
+    volumes:
+      - ./Redis:/data
     ports:
       - 6379:6379
     networks:
