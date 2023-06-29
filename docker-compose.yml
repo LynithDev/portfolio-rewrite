@@ -6,12 +6,15 @@ services:
     build: .
     ports:
       - 3000:3000
-    networks:
-      default:
-        ipv4_address: ${APP_IP}
+    links:
+      - mongo
+      - redis
     depends_on:
       - mongo
       - redis
+    networks:
+      default:
+        ipv4_address: ${APP_IP}
   mongo:
     container_name: mongo
     image: mongo
@@ -42,4 +45,4 @@ services:
 networks:
   default:
     external: true
-    name: Minimalistic Portfolio
+    name: Minimalistic-Portfolio
