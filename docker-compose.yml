@@ -13,8 +13,7 @@ services:
       - mongo
       - redis
     networks:
-      default:
-        ipv4_address: ${APP_IP}
+      - minimalistic-portfolio
   mongo:
     container_name: mongo
     image: mongo
@@ -24,8 +23,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      default:
-        ipv4_address: ${MONGO_IP}
+      - minimalistic-portfolio
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
@@ -39,10 +37,8 @@ services:
     ports:
       - 6379:6379
     networks:
-      default:
-        ipv4_address: ${REDIS_IP}
+      - minimalistic-portfolio
         
 networks:
-  default:
-    external: true
-    name: Minimalistic-Portfolio
+  minimalistic-portfolio:
+    driver: bridge
