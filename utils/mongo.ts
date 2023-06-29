@@ -15,6 +15,7 @@ export async function connect() {
     // console.log("Connected to MongoDB");
     // clearTimeout(timeout);
 
+    console.log("Attempting to connect to " + URI);
     client.connect().then(() => {
         _isConnected = true;
         console.log("Connected to MongoDB");
