@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const URI = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:${process.env.MONGO_PORT}/?directConnection=true`
+const URI = process.env.MONGO_URL as string;
 
 const client = new MongoClient(URI);
 let _isConnected = false;
