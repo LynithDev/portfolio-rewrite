@@ -17,7 +17,7 @@ export default async function Page() {
             {/* Intro Section */}
             <section className="h-screen flex flex-col justify-center items-center">
                 <Animate animations={["fade", "slide"]} className="max-w-content flex flex-col justify-evenly items-center text-center">
-                    <Header animate={false} size="lg" className="text-7xl">Lynith</Header>
+                    <Header size="lg" className="text-7xl">Lynith</Header>
                     <p className="max-w-xs text-xl mt-sm">A developer, designer and Linux enthusiast from Poland.</p>
                     <ButtonGroup className="mt-sm">
                         <Button link={`https://ko-fi.com/${socials.kofi}`}><HeartIcon className="flex-grow mr-xs w-5" /> Donate</Button>

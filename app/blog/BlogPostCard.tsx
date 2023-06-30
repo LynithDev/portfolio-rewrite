@@ -27,7 +27,7 @@ export function BlogPostCard(blog: BlogPost) {
                         <p className="flex flex-row whitespace-nowrap opacity-70 md:text-base text-sm"><EyeIcon className="md:w-6 w-4 mr-xxs" /> {views} {viewText}</p>
                     </div>
                     
-                    <Header size="sm" underline={false} animate={false}>{blog.title}</Header>
+                    <Header size="sm" underline={false} >{blog.title}</Header>
                     <p>{blog.content_short}</p>
 
                     <div className="flex flex-row flex-shrink mt-sm">

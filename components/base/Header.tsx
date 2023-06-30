@@ -4,15 +4,13 @@ import { ComponentProps, createElement } from "react"
 
 type HeaderProps = {
     size?: 'sm' | 'md' | 'lg',
-    animate?: boolean,
     underline?: boolean
 }
 
 export default function Header(props: ComponentProps<"h1"> & HeaderProps) {
-    let { size, animate, underline, children, ...rest } = props;
+    let { size, underline, children, ...rest } = props;
 
     size ??= 'md';
-    animate ??= true;
     underline ??= true;
 
     const level = {
@@ -29,6 +27,6 @@ export default function Header(props: ComponentProps<"h1"> & HeaderProps) {
 
     return createElement(`h${level}`, { 
         ...rest,
-        className: `header ${animate ? "animate" : ""} ${levelClasses} ${rest.className ?? ""}`
+        className: `header ${levelClasses} ${rest.className ?? ""}`
     }, children);
 }

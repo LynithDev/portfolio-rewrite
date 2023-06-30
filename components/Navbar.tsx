@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ComponentProps, HTMLProps, ReactElement, useEffect, useRef } from "react";
-import Button from "./base/Button";
 import { CurrencyDollarIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Animate } from "./base/Animate";
+import { Animate, Button } from "./base";
 
 const links: [string, string][] = [
     ["Home", "/"],

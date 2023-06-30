@@ -1,19 +1,15 @@
 import { Animate, Button, Header } from "@/components/base";
-import BlogPost from "@/types/BlogPost";
 import { GenerateMetadataProps } from "@/types/GenerateMetadataProps";
 import { convertTitleToURLFormat, getBlogData, getBlogs, updateBlogPost } from "@/utils/blog";
 import { pluralize } from "@/utils/strings";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import { ObjectId, WithId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { Metadata } from "next";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import redis from "@/utils/redis";
 import crypto from "crypto";
 import { AnimatedImage } from "./ImageAnimation";
-import Head from "next/head";
-import { useTheme } from "@/components/ThemeSwitcher";
 
 type PageParams = {
     year: string;
@@ -63,24 +59,30 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
 
 async function updateViewCount(blog: ObjectId, views?: number) {
     if (process.env.UNIQUE_VIEW_COUNTER && process.env.UNIQUE_VIEW_COUNTER === "true") {
-        const ip = headers().get("x-forwarded-for");
-        if (!ip) {
+        try {
+            const ip = headers().get("x-forwarded-for");
+            if (!ip) {
+                return;
+            }
+
+            const cluster = await redis.getCluster();
+            if (!cluster) await redis.connect();
+
+            const buf = await crypto.webcrypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
+            const hash = Array.from(new Uint8Array(buf))
+                .map((b) => b.toString(16).padStart(2, "0"))
+                .join("");
+            
+            const isNew = await cluster?.set([hash, blog.toString()].join(":"), 1, {
+                NX: true,
+                EX: 60 * 60 * 24 // 24 hours
+            });
+
+            if (!isNew) return;
+        } catch (e) {
+            console.error(e);
             return;
         }
-
-        const cluster = await redis.getCluster();
-        if (!cluster) await redis.connect();
-
-        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
-        const hash = Array.from(new Uint8Array(buf))
-            .map((b) => b.toString(16).padStart(2, "0"))
-            .join("");
-        
-        const isNew = await cluster?.set([hash, blog.toString()].join(":"), 1, {
-            NX: true,
-            EX: 60 * 60 * 24 // 24 hours
-        });
-        if (!isNew) return;
     }
 
     return updateBlogPost(blog, {

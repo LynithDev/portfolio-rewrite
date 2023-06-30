@@ -13,7 +13,7 @@ module.exports = {
 
             accent: {
                 DEFAULT: "#f05050",
-                light: "theme(colors.accent / 10)"
+                light: "#f26262"
             },
 
             primary: {
@@ -48,6 +48,7 @@ module.exports = {
             padding: spacing(),
 
             maxWidth: width(),
+            minWidth: width(),
             width: width(),
             maxHeight: {
                 "navbar": "104px"

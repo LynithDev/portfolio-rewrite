@@ -4,7 +4,7 @@ import { Button } from "@components/base";
 import Image from "next/image";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { GitHubIcon } from "@components/base/Icon";
-import { Animate } from "../base/Animate";
+import Animate from "../base/Animate";
 import { Project, metadata } from "@/utils/metadata";
 
 async function getData() {

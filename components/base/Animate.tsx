@@ -3,7 +3,7 @@
 import { MotionProps, motion } from "framer-motion";
 import { ComponentProps, PropsWithChildren, RefAttributes } from "react";
 
-type AnimationType = "slide" | "slideLeftFar" | "fade";
+export type AnimationType = "slide" | "slideLeftFar" | "fade";
 
 type AnimateProps = {
     animations: AnimationType[],
@@ -52,7 +52,7 @@ const variants: Variants = {
 const getInitialProps = (name: AnimationType) => variants[name].initial;
 const getAnimateProps = (name: AnimationType) => variants[name].animate;
 
-export function Animate(props: PropsWithChildren<AnimateProps & ComponentProps<"div">>) {
+export default function Animate(props: PropsWithChildren<AnimateProps & ComponentProps<"div">>) {
     const { animations, ...rest } = props; 
 
     // Combine all selected animations into one object

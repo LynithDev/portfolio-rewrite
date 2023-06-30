@@ -44,7 +44,7 @@ const getAsReactNode = async (markdown: string) => {
             components: {
                 h1: (props: any) => (
                     <>
-                    <Header underline={false} animate={false} size="lg" className="mt-md" {...props} />
+                    <Header underline={false} size="lg" className="mt-md" {...props} />
                     <span className="w-full h-px bg-black dark:bg-white bg-opacity-20"></span>
                     </>
                 ),
