@@ -1,5 +1,19 @@
 const MongoClient = require('mongodb').MongoClient;
 
+const http = require('http');
+
+http.get('http://mongo:27017', (res) => {
+    let data = '';
+
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+  
+    resp.on('end', () => {
+      console.log(data);
+    });
+});
+
 const url = "mongodb://mongo:27017/";
 
 const connectToDatabase = async () => {
