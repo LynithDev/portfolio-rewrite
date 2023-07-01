@@ -1,6 +1,6 @@
 "use client";
 
-import { Animate, Header } from "@/components/base";
+import { Animate, Header, Pill } from "@/components/base";
 import BlogPost from "@/types/BlogPost";
 import { pluralize } from "@/utils/strings";
 import { EyeIcon } from "@heroicons/react/24/solid";
@@ -30,9 +30,9 @@ export function BlogPostCard(blog: BlogPost) {
                     <Header size="sm" underline={false} >{blog.title}</Header>
                     <p>{blog.content_short}</p>
 
-                    <div className="flex flex-row flex-shrink mt-sm">
+                    <div className="flex flex-row flex-shrink mt-sm gap-2">
                         {blog.tags.map((tag, i) => (
-                            <span key={i} className="text-xs bg-accent rounded-sm ml-xxs first:ml-0 px-sm py-xxs text-white font-medium">{tag}</span>   
+                            <Pill size="sm" key={i}>{tag}</Pill>
                         ))}
                     </div>
                 </div>
