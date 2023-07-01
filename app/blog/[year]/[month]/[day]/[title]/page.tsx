@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import redis from "@/utils/redis";
 import crypto from "crypto";
-import { AnimatedImage } from "./ImageAnimation";
+import Image from "next/image";
 
 type PageParams = {
     year: string;
@@ -121,7 +121,7 @@ export default async function BlogPage({ params }: { params: PageParams }) {
     return (
         <section className="min-h-screen flex flex-col justify-center items-center md:mt-navbar">
             <Animate animations={["fade", "slide"]} className="w-full flex flex-col mb-xl justify-start items-center gap-3 overflow-x-hidden">
-                <AnimatedImage src={post.thumbnail} alt={`Thumbnail for ${post.title}`} />
+                <Image src={post.thumbnail} alt={`Thumbnail for ${post.title}`} width={1280} height={720} className="md:max-w-content md:rounded-md aspect-video w-full" />
                 <div className="max-w-content w-full lg:px-0 px-md flex flex-col justify-start items-start gap-3">
                     <div className="flex md:flex-row flex-col md:justify-between justify-start w-full">
                         <p className="text-md opacity-80">By <b className="text-lg font-medium text-accent">{post.author}</b> on <b className="text-lg font-medium text-accent">{prettyDate}</b> at <b className="text-lg font-medium text-accent">{prettyTime}</b></p>

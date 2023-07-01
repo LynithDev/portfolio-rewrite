@@ -1,5 +1,5 @@
 import { CodeBracketIcon, CodeBracketSquareIcon, HeartIcon } from "@heroicons/react/24/solid";
-import { Button, Header, ButtonGroup, Animate } from "@components/base";
+import { Button, Header, ButtonGroup, Animate, Pill } from "@components/base";
 import { Projects } from "@components/pages/Projects";
 import { metadata } from "@/utils/metadata";
 
@@ -52,9 +52,9 @@ export default async function Page() {
                     <Header size="sm">My Skills</Header>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum earum laborum deleniti facere eos illum obcaecati? Ullam ab hic facilis ut voluptatibus numquam, voluptate officiis, temporibus quae doloremque adipisci similique.</p>
 
-                    <div className="flex flex-row flex-wrap w-full mt-sm">
+                    <div className="flex flex-row flex-wrap w-full mt-sm gap-2">
                         {skills.map((skill, i) => (
-                            <p key={i} className="bg-accent px-sm py-xs m-xs text-sm text-white rounded-md">{skill}</p>
+                            <Pill key={i}>{skill}</Pill>
                         ))}
                     </div>
                 </Animate>
