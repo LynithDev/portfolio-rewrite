@@ -87,7 +87,7 @@
     }
 
     .btn {
-        @apply leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-80;
+        @apply ring-focus leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:transition-colors hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-80 disabled:opacity-80 disabled:hover:bg-opacity-100 disabled:hover:text-opacity-100 disabled:hover:cursor-default;
     }
 
     .link {
@@ -98,6 +98,12 @@
         @apply after:h-px after:bottom-0.5 after:rounded-none;
     }
 
+}
+
+@layer utilities {
+    .ring-focus {
+        @apply focus:ring focus:ring-accent/40 focus:outline-none transition-shadow;
+    }
 }
 
 .task-list-item {

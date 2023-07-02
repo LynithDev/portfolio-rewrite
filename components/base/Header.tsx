@@ -11,7 +11,7 @@ export default function Header(props: ComponentProps<"h1"> & HeaderProps) {
     let { size, underline, children, ...rest } = props;
 
     size ??= 'md';
-    underline ??= true;
+    underline ??= false;
 
     const level = {
         sm: 3,

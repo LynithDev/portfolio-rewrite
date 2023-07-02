@@ -56,7 +56,7 @@ module.exports = {
 
             transitionProperty: {
                 "width": "width",
-                "shadow": "box-shadow"
+                "color-ring": "box-shadow, color"
             },
         }
     },

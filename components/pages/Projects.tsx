@@ -33,14 +33,20 @@ function ProjectCard(props: Project) {
             </div>
             <Image alt={`An image of ${props.name}`} src={props.thumbnail} width={300} height={180} className="rounded-md max-h-44 aspect-video object-cover w-full" />
             <div className="mb-xs mt-sm flex flex-col flex-1">
-                <span className="ml-sm text-lg">{props.name}</span>
+                <span className="ml-xs text-lg font-medium">{props.name}</span>
                 <span className="ml-xs">{description}</span>
             </div>
             <div className="w-full flex flex-row justify-center items-center">
-                {props.repository && <Button link={props.repository} buttonStyle="invert" className="w-full mr-xxs">
-                    <GitHubIcon className="mr-xs" /> GitHub    
-                </Button>}
-                <Button link={props.link} buttonStyle="invert" className="w-full ml-xxs first:m-0"><ArrowTopRightOnSquareIcon className="w-4 mr-xs stroke-2" />Open</Button>
+                {props.repository && (
+                    <Button link={props.repository} buttonStyle="invert" className="w-full mr-xxs">
+                        <GitHubIcon className="mr-xs" /> 
+                        GitHub    
+                    </Button>
+                )}
+                <Button link={props.link} buttonStyle="invert" className="w-full ml-xxs first:m-0">
+                    <ArrowTopRightOnSquareIcon className="w-4 mr-xs stroke-2" />
+                    Open
+                </Button>
             </div>
         </Animate>
     )
@@ -62,7 +68,7 @@ export async function Projects(props: ComponentProps<"div">) {
     const projects: Project[] = data.projects;
 
     return (
-        <div {...props} className={`flex flex-row flex-wrap max-w-5xl w-full ${props.className}`}>
+        <div {...props} className={`flex flex-row flex-wrap max-w-5xl w-full  ${props.className}`}>
             {projects.map((project, key) => {
                 const svgIcons = iconCache().filter((icon) => project.icons.includes(icon.key as any));
 

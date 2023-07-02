@@ -2,6 +2,7 @@ import { CodeBracketIcon, CodeBracketSquareIcon, HeartIcon } from "@heroicons/re
 import { Button, Header, ButtonGroup, Animate, Pill } from "@components/base";
 import { Projects } from "@components/pages/Projects";
 import { metadata } from "@/utils/metadata";
+import ContactForm from "@/components/ContactForm";
 
 const skills = [
     "React", "TypeScript", "NextJS", "Rust", "Java", "JavaScript", 
@@ -29,7 +30,7 @@ export default async function Page() {
             {/* About Me */}
             <section className=" md:p-xl px-md py-xl flex flex-row justify-center items-center">
                 <Animate duration={0.7} animations={["fade", "slideLeftFar"]} className="max-w-content w-full flex flex-col justify-start items-start text-left bg-secondary dark:bg-secondary-dark md:p-xl p-md rounded-xl">
-                    <Header size="sm">About Me</Header>
+                    <Header size="sm" underline={true}>About Me</Header>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum earum laborum deleniti facere eos illum obcaecati? Ullam ab hic facilis ut voluptatibus numquam, voluptate officiis, temporibus quae doloremque adipisci similique.</p>
                 </Animate>
             </section>
@@ -38,7 +39,7 @@ export default async function Page() {
             <span id="projects" className="block relative md:-top-20 invisible"></span>
             <section className=" md:p-xl p-md flex flex-row justify-center items-center bg-secondary dark:bg-secondary-dark ">
                 <Animate animations={["fade", "slide"]} className="max-w-content w-full flex flex-col justify-start items-start text-left rounded-xl">
-                    <Header size="sm">My Projects</Header>
+                    <Header size="sm" underline={true}>My Projects</Header>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum earum laborum deleniti facere eos illum obcaecati? Ullam ab hic facilis ut voluptatibus numquam, voluptate officiis, temporibus quae doloremque adipisci similique.</p>
 
                     {/* @ts-expect-error Async Server Component */}
@@ -49,7 +50,7 @@ export default async function Page() {
             {/* Skills */}
             <section className=" md:p-xl p-md flex flex-row justify-center items-center">
                 <Animate duration={0.7} animations={["fade", "slideLeftFar"]} className="max-w-content w-full flex flex-col justify-start items-start text-left bg-secondary dark:bg-secondary-dark md:p-xl p-md rounded-xl">
-                    <Header size="sm">My Skills</Header>
+                    <Header size="sm" underline={true}>My Skills</Header>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum earum laborum deleniti facere eos illum obcaecati? Ullam ab hic facilis ut voluptatibus numquam, voluptate officiis, temporibus quae doloremque adipisci similique.</p>
 
                     <div className="flex flex-row flex-wrap w-full mt-sm gap-2">
@@ -58,6 +59,11 @@ export default async function Page() {
                         ))}
                     </div>
                 </Animate>
+            </section>
+
+            {/* Contact Form */}
+            <section className="md:p-xl px-md py-xl flex flex-row justify-center items-center">
+                <ContactForm />
             </section>
         </>
     )

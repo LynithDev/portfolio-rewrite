@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, cloneElement } from "react";
+import React, { ComponentProps, cloneElement, forwardRef } from "react";
 
 export type ButtonProps = {
     link?: string,
     buttonStyle?: "primary" | "invert",
 }
 
-export default function Button({ link, buttonStyle, children, ...rest}: ButtonProps & ComponentProps<"button">) {
+const Button = forwardRef(function Button({ link, buttonStyle, children, ...rest}: ButtonProps & ComponentProps<"button">, ref) {
     let styleClass;
 
     switch (buttonStyle) {
@@ -24,7 +24,9 @@ export default function Button({ link, buttonStyle, children, ...rest}: ButtonPr
     const className = `btn ${styleClass} ${rest.className ?? ""}`;
 
     return link 
-        ? <Link {...rest as typeof Link} className={className} href={link}>{children}</Link>
-        : <button {...rest} className={className}>{children}</button>
+        ? <Link {...rest as typeof Link} className={className} href={link} ref={ref as any}>{children}</Link>
+        : <button {...rest} className={className} ref={ref as any}>{children}</button>
 
-}
+})
+
+export default Button;
