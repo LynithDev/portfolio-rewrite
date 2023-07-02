@@ -1,5 +1,7 @@
+import { Section } from "@/components/base";
 import { GenerateMetadataProps } from "@/types/GenerateMetadataProps";
 import { Metadata } from "next"
+import EmbedInputs from "./EmbedInputs";
 
 export async function generateMetadata(props: GenerateMetadataProps): Promise<Metadata> {
 
@@ -29,11 +31,9 @@ export async function generateMetadata(props: GenerateMetadataProps): Promise<Me
 }
 
 export default function EmbedGenerator() {
-
-
     return (
-        <section className="h-screen flex flex-col justify-center items-center">
-            <h1>Hellow orld</h1>
-        </section>
+        <Section fullView startAtHalfPage>
+            <EmbedInputs />
+        </Section>
     )
 }

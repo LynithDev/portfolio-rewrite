@@ -16,7 +16,7 @@ export default async function BlogPage() {
     const blogs = await getData();
     
     return (
-        <Section>
+        <Section fullView startAtHalfPage>
             <Header size="lg" underline={false}>Blog</Header>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt reprehenderit voluptates, vero repellat corrupti perferendis? Voluptate, suscipit. Consequuntur minima corrupti, expedita facilis tempora ipsum quidem accusantium, harum, accusamus aspernatur inventore.</p>
             <div className="flex flex-row flex-wrap flex-1">

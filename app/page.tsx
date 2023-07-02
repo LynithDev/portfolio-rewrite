@@ -1,5 +1,5 @@
 import { CodeBracketIcon, CodeBracketSquareIcon, HeartIcon } from "@heroicons/react/24/solid";
-import { Button, Header, ButtonGroup, Animate, Pill } from "@components/base";
+import { Button, Header, ButtonGroup, Animate, Pill, Section } from "@components/base";
 import { Projects } from "@components/pages/Projects";
 import { metadata } from "@/utils/metadata";
 import ContactForm from "@/components/ContactForm";
@@ -62,9 +62,12 @@ export default async function Page() {
             </section>
 
             {/* Contact Form */}
-            <section className="md:p-xl px-md py-xl flex flex-row justify-center items-center">
+            <Section>
                 <ContactForm />
-            </section>
+            </Section>
+            {/* <section className="md:p-xl px-md py-xl flex flex-row justify-center items-center">
+                <ContactForm />
+            </section> */}
         </>
     )
 }

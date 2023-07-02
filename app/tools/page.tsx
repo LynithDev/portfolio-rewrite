@@ -6,7 +6,7 @@ export default async function ToolsPage() {
     ]
 
     return (
-        <Section>
+        <Section fullView startAtHalfPage>
             <Header size="lg" underline={false}>Tools</Header>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus optio at, dolorem veritatis sed earum aperiam, obcaecati accusamus impedit ipsa doloremque, praesentium ipsum amet! Repudiandae odit eaque sit voluptatibus similique!</p>
             {tools.map((tool, i) => {

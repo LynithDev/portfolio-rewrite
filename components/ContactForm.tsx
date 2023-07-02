@@ -27,14 +27,10 @@ export default function ContactForm() {
         setFilled(titleRef.current?.value != "" && bodyRef.current?.value != "")
     }
 
-    // useEffect(() => {
-    //     buttonRef.current?.disabled = !filled;
-    // }, [filled])
-
     return (
         <form action="mailto:me@lynith.dev" className="w-full max-w-content flex flex-col gap-2" onSubmit={submit}>
             <span className="w-max"><Header size="md" underline>Contact Me</Header></span>
-            <p>Want to send me a message? Send me an email at <HyperLink href="mailto:me@lynith.dev">me@lynith.dev</HyperLink> or use this contact form</p>
+            <p>Want to send me a message? Send me an email at <HyperLink href="mailto:me@lynith.dev">me@lynith.dev</HyperLink> or use this contact form.</p>
 
             <Header size="sm" className="mt-md">Title</Header>
             <TextInput ref={titleRef} autoComplete="off" placeholder="Title" name="subject" onChange={input}></TextInput>

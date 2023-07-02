@@ -6,17 +6,17 @@ import Animate, { AnimationType } from "./Animate";
 type SectionProps = ComponentProps<"div"> & {
     animations?: AnimationType[],
     startAtHalfPage?: boolean,
+    fullView?: boolean
 }
 
 export default function Section(props: SectionProps) {
-    let { children, className, animations, startAtHalfPage, ...rest } = props;
+    console.log(props.fullView)
+    let { children, className, fullView = false, animations = ["fade", "slide"], startAtHalfPage = false, ...rest } = props;
 
-    animations ??= ["fade", "slide"];
-    startAtHalfPage ??= true;
 
     return (
-        <section className="min-h-screen lg:mx-0 mx-md flex flex-col justify-start items-center">
-            <Animate animations={animations} className={`max-w-content min-w-content flex flex-col mb-xl justify-start items-start gap-3 ${startAtHalfPage ? "mt-half-page" : ""} ${className ?? ""}`}>
+        <section className={`${fullView ? "min-h-screen" : ""} lg:mx-0 mx-md flex flex-col justify-start items-center`}>
+            <Animate animations={animations} className={`max-w-content w-full flex flex-col justify-start items-start gap-3 ${startAtHalfPage ? "mt-half-page mb-xl" : "my-lg"} ${className ?? ""}`}>
                 {children}
             </Animate>
         </section>
