@@ -6,6 +6,7 @@ import { ComponentProps, HTMLProps, ReactElement, useEffect, useRef } from "reac
 import { CurrencyDollarIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { Animate, Button } from "./base";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 
 const links: [string, string][] = [
     ["Home", "/"],
@@ -60,6 +61,12 @@ export default function Navbar() {
         document.addEventListener("click", clickListener);
     }
 
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        navbarRef.current?.classList.toggle("shadow-lg", latest > 40);
+    });
+
     return (
         <>
             <div className="fixed left-2 top-2 md:hidden flex p-sm z-50 bg-primary dark:bg-primary-dark rounded-md" onClick={showNavbar}>
@@ -68,7 +75,7 @@ export default function Navbar() {
             <div ref={overlayRef} className="fixed left-0 top-0 w-screen h-screen bg-black bg-opacity-50 z-40 hidden">
                 
             </div>
-            <nav ref={navbarRef} className="md:max-h-navbar md:px-md lg:px-0 transition-transform md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
+            <nav ref={navbarRef} className="md:transition-shadow transition-transform md:max-h-navbar md:px-md lg:px-0 md:w-full md:h-auto h-full flex md:flex-row flex-col justify-center md:items-center fixed left-0 top-0 md:translate-x-0 -translate-x-full md:bg-primary md:dark:bg-primary-dark bg-secondary dark:bg-secondary-dark z-50">
                 <Animate animations={["fade"]} className="max-w-content flex-1 flex md:flex-row flex-col md:px-0 px-md py-md">
                     <div className="flex flex-row flex-1 justify-end items-center">
                         {/* Placeholder element so the links can be centered lmfao */}

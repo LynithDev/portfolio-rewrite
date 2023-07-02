@@ -35,7 +35,7 @@ export default async function Footer() {
 
     return (
         <footer className="bg-secondary-dark">
-            <div className="bg-secondary-dark p-xl text-white">
+            <div className="dark:bg-secondary-dark bg-secondary p-xl dark:text-white text-black">
                 <div className="max-w-content mx-auto flex flex-col md:flex-row md:justify-between justify-center md:items-start items-center">
                     <FooterColumn header="Socials">
                         {socials.map((social, index) => (
