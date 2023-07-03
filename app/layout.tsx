@@ -16,7 +16,10 @@ export const metadata: Metadata = {
         url: "https://lynith.dev/",
         siteName: "Lynith",
     },
-    keywords: ["lynith", "lynithdev", "programming", "programmer", "commission", "developer", "coding", "coder", "javascript", "html", "css", "js", "nextjs", "rust", "java", "go", "kofi", "donate", "commission", "foss", "linux", "oss", "software", "github"]
+    keywords: ["lynith", "lynithdev", "programming", "programmer", "commission", "developer", "coding", "coder", "javascript", "html", "css", "js", "nextjs", "rust", "java", "go", "kofi", "donate", "commission", "foss", "linux", "oss", "software", "github"],
+    other: {
+        "darkreader-lock": "true"
+    }
 }
 
 const outfit = Outfit({
@@ -29,12 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <head>
                 <script dangerouslySetInnerHTML={{
-                    __html: `
-                        {
-                            const theme = window.localStorage.getItem('page-theme');
-                            document.documentElement.classList.toggle('dark', theme === 'dark');
-                        }  
-                    `
+                    __html: `{const theme=window.localStorage.getItem('page-theme');document.documentElement.classList.toggle('dark',theme==='dark');}`
                 }}></script>
             </head>
             <body className={`${outfit.variable} bg-primary dark:bg-primary-dark m-0 p-0 font-sans text-black dark:text-white`}>

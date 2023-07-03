@@ -78,7 +78,7 @@
     .cool-underline {
         @apply no-underline relative;
         @apply after:transition-all after:pointer-events-none after:absolute after:left-0 after:bottom-px after:w-4/5 after:h-2 after:bg-accent-light after:rounded-none after:bg-opacity-60 after:z-0;
-        @apply hover:after:w-full hover:after:h-0;
+        @apply hover:after:w-full hover:after:h-1;
     }
 
     .header.cool-underline.sm {
@@ -87,7 +87,7 @@
     }
 
     .btn {
-        @apply ring-focus leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:transition-colors hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-80 disabled:opacity-80 disabled:hover:bg-opacity-100 disabled:hover:text-opacity-100 disabled:hover:cursor-default;
+        @apply ring-focus leading-5 flex flex-row justify-center items-center text-center py-sm px-md rounded-lg font-medium hover:transition-colors hover:bg-opacity-80 dark:hover:bg-opacity-60 hover:text-opacity-50 disabled:opacity-50 disabled:hover:bg-opacity-100 disabled:hover:text-opacity-100 disabled:hover:cursor-default;
     }
 
     .link {

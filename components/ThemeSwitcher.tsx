@@ -10,7 +10,9 @@ export default function ThemeSwitcher(props: ComponentProps<"button">) {
 
     const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
-    const icon = theme === 'light' ? <MoonIcon className="w-5 pointer-events-none" /> : <SunIcon className="w-5 pointer-events-none" />;
+    const icon = theme === 'light' 
+        ? <MoonIcon className="w-5 pointer-events-none" /> 
+        : <SunIcon className="w-5 pointer-events-none" />;
 
     return (
         <Button {...props as any} onClick={toggleTheme} aria-label="Switch Theme" buttonStyle={"invert"} className={`px-sm ${props.className}`}>
@@ -21,9 +23,12 @@ export default function ThemeSwitcher(props: ComponentProps<"button">) {
 
 export function useTheme() {
     const [theme, setTheme] = useState('light');
-    const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
     useEffect(() => {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            setTheme(e.matches ? 'dark' : 'light');
+        });
+
         if (window.localStorage.getItem('page-theme') !== null) {
             setTheme(window.localStorage.getItem('page-theme')!);
             return;
