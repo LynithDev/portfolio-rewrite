@@ -21,14 +21,14 @@ export default function ButtonGroup(props: ComponentProps<"div"> & PropsWithChil
     const modified = Children.map(children, (child) => {
         if (isValidElement(child)) {
             return cloneElement(child as ReactElement, { 
-                className: styleClass + " rounded-none relative after:absolute after:z-10 after:-right-px after:top-1/2 after:-translate-y-1/2 after:bg-white after:h-1/2 after:rounded-xl after:w-0.5 last:after:content-none" + (child.props.className ?? "")
+                className: styleClass + " rounded-none first:rounded-tl-lg first:rounded-bl-lg last:rounded-tr-lg last:rounded-br-lg relative after:absolute after:z-10 after:-right-px after:top-1/2 after:-translate-y-1/2 after:bg-white after:h-1/2 after:rounded-xl after:w-0.5 last:after:content-none" + (child.props.className ?? "")
             })
         }
     });
 
     return (
-        <div {...rest} className={`flex flex-row justify-center items-center w-full rounded-lg overflow-hidden ${rest.className}`}>
-            <div className="flex flex-row justify-center items-center rounded-lg overflow-hidden">
+        <div {...rest} className={`flex flex-row justify-center items-center w-full rounded-lg ${rest.className}`}>
+            <div className="flex flex-row justify-center items-center rounded-lg">
                 {modified}
             </div>
         </div>

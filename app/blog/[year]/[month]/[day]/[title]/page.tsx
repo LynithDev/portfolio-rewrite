@@ -1,4 +1,4 @@
-import { Animate, Button, Header } from "@/components/base";
+import { Animate, Button, Header, Pill } from "@/components/base";
 import { GenerateMetadataProps } from "@/types/GenerateMetadataProps";
 import { convertTitleToURLFormat, getBlogData, getBlogs, updateBlogPost } from "@/utils/blog";
 import { pluralize } from "@/utils/strings";
@@ -119,13 +119,20 @@ export default async function BlogPage({ params }: { params: PageParams }) {
     updateViewCount(post._id, views);
 
     return (
-        <section className="min-h-screen flex flex-col justify-center items-center md:mt-navbar">
+        <section className="min-h-screen flex flex-col justify-start items-center md:mt-navbar">
             <Animate animations={["fade", "slide"]} className="w-full flex flex-col mb-xl justify-start items-center gap-3 overflow-x-hidden">
                 <Image src={post.thumbnail} alt={`Thumbnail for ${post.title}`} width={1280} height={720} className="md:max-w-content md:rounded-md aspect-video w-full" />
                 <div className="max-w-content w-full lg:px-0 px-md flex flex-col justify-start items-start gap-3">
                     <div className="flex md:flex-row flex-col md:justify-between justify-start w-full">
                         <p className="text-md opacity-80">By <b className="text-lg font-medium text-accent">{post.author}</b> on <b className="text-lg font-medium text-accent">{prettyDate}</b> at <b className="text-lg font-medium text-accent">{prettyTime}</b></p>
                         <p className="flex flex-row whitespace-nowrap opacity-70 md:text-base text-sm"><EyeIcon className="md:w-6 w-4 mr-xxs" /> {views} {viewText}</p>
+                    </div>
+
+                    {/* Fix overflow causing everything else to shift up */}
+                    <div className="flex flex-row flex-wrap justify-start items-start gap-2">
+                        {post.tags && post.tags.map((tag, i) => (
+                            <Pill key={i} size="md">{tag}</Pill>
+                        ))}
                     </div>
 
                     {post.content}
