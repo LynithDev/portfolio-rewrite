@@ -3,7 +3,8 @@
 import { ComponentProps, forwardRef } from "react";
 
 type TextInputProps = Omit<ComponentProps<"input">, "type"> & {
-    multiline?: boolean
+    multiline?: boolean,
+    type?: "text" | "password"
 }
 
 const TextInput = forwardRef(function TextInput(props: TextInputProps, ref) {

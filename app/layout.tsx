@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "@components/Navbar"
 import Footer from "@components/Footer";
+import AuthSessionProvider from "@components/AuthSessionProvider";
 
 export const metadata: Metadata = {
     title: "Lynith",
@@ -36,16 +37,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 }}></script>
             </head>
             <body className={`${outfit.variable} bg-primary dark:bg-primary-dark m-0 p-0 font-sans text-black dark:text-white`}>
-                <header>
-                    <Navbar />
-                </header>
+                <AuthSessionProvider>
+                    <header>
+                        <Navbar />
+                    </header>
 
-                <main>
-                    {children}
-                </main>
+                    <main>
+                        {children}
+                    </main>
 
-                {/* @ts-expect-error Async Server Component */}
-                <Footer />
+                    {/* @ts-expect-error Async Server Component */}
+                    <Footer />
+                </AuthSessionProvider>
             </body>
         </html>
     )

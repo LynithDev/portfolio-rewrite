@@ -6,6 +6,7 @@ const nextConfig = {
         domains: [
             'raw.githubusercontent.com',
             'avatars.githubusercontent.com',
+            'www.gravatar.com'
         ],
     },
     experimental: {

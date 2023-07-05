@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ComponentProps, HTMLProps, ReactElement, useEffect, useRef } from "react";
-import { CurrencyDollarIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/solid";
+import { CurrencyDollarIcon, Bars3BottomLeftIcon, UserIcon } from "@heroicons/react/24/solid";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { Animate, Button } from "./base";
 import { useMotionValueEvent, useScroll } from "framer-motion";
@@ -25,6 +25,14 @@ function NavbarLink({ href, name }: { href: string, name: string }) {
 
     return (
         <Link href={href} scroll={false} className={`${active} md:text-base text-xl p-sm m-sm hover:text-accent/90`}>{name}</Link>
+    )
+}
+
+function AccountButton({ className }: { className?: string }) {
+    return (
+        <Button link="/account" buttonStyle="invert" className={`px-sm ${className}`}>
+            <UserIcon className="w-5 pointer-events-none" />
+        </Button>
     )
 }
 
@@ -88,7 +96,10 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex md:flex-row flex-col flex-1 justify-end md:items-center items-start">
-                        <ThemeSwitcher className="mr-xs" />
+                        <div className="flex flex-row">
+                            <ThemeSwitcher className="mr-xs" />
+                            <AccountButton className="mr-xs" />
+                        </div>
                         <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/lynith"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
                     </div>
                 </Animate>

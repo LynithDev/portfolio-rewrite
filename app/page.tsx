@@ -31,6 +31,7 @@ export default async function Page() {
             <section className=" md:p-xl px-md py-xl flex flex-row justify-center items-center">
                 <Animate duration={0.7} animations={["fade", "slideLeftFar"]} className="max-w-content w-full flex flex-col justify-start items-start text-left bg-secondary dark:bg-secondary-dark md:p-xl p-md rounded-xl">
                     <Header size="sm" underline={true}>About Me</Header>
+                    
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum earum laborum deleniti facere eos illum obcaecati? Ullam ab hic facilis ut voluptatibus numquam, voluptate officiis, temporibus quae doloremque adipisci similique.</p>
                 </Animate>
             </section>

@@ -27,7 +27,7 @@ function ProjectCard(props: Project) {
     }
 
     return ( 
-        <Animate animations={["fade", "slide"]} className="lg:w-1/3 relative md:w-[calc(50%-theme(margin.xs)*2)] w-full lg:max-w-project-max min-w m-xs bg-white dark:bg-primary-dark p-sm rounded-lg flex flex-col justify-between">
+        <Animate animations={["fade", "slide"]} className="lg:w-1/3 relative md:w-[calc(50%-theme(margin.xs)*2)] w-full lg:max-w-project-max min-w bg-white dark:bg-primary-dark p-sm rounded-lg flex flex-col justify-between">
             <div className="absolute flex flex-row p-xs m-xs rounded-md bg-primary dark:bg-primary-dark">
                 {props.icons}
             </div>
@@ -68,7 +68,7 @@ export async function Projects(props: ComponentProps<"div">) {
     const projects: Project[] = data.projects;
 
     return (
-        <div {...props} className={`flex flex-row flex-wrap max-w-5xl w-full  ${props.className}`}>
+        <div {...props} className={`flex flex-row flex-wrap max-w-5xl justify-between w-full gap-2 ${props.className}`}>
             {projects.map((project, key) => {
                 const svgIcons = iconCache().filter((icon) => project.icons.includes(icon.key as any));
 
