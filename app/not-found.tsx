@@ -15,7 +15,7 @@ export default function NotFoundPage() {
     return (
         <section className="h-screen flex flex-col justify-center items-center">
             <Animate animations={["fade", "slide"]} className="flex flex-col justify-center items-center">
-                <Header size="md" animate={false} underline={false}>{message}</Header>
+                <Header size="md" underline={false}>{message}</Header>
                 <HyperLink href="/" className="mt-sm">Go back home</HyperLink>
             </Animate>
         </section>
