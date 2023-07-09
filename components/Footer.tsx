@@ -52,7 +52,7 @@ export default async function Footer() {
             </div>
             
             {process.env.WEBSITE_SOURCE_CODE && (
-                <div className="bg-black/50 p-md text-white">
+                <div className="bg-secondary-dark p-md text-white">
                     <div className="max-w-content mx-auto flex flex-col md:flex-row justify-center items-center">
                         <p className="opacity-80">This website is open source. Check it out <HyperLink href={process.env.WEBSITE_SOURCE_CODE}>here</HyperLink></p>
                     </div>

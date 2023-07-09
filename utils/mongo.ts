@@ -1,35 +1,32 @@
 import { MongoClient } from "mongodb";
 
-const URI = process.env.MONGO_URL as string;
+const uri = process.env.MONGO_URL as string;
 
-const client = new MongoClient(URI);
-let _isConnected = false;
+let client: MongoClient;
+export let clientPromise: Promise<MongoClient>;
 
-export async function connect() {
-    console.log("Attempting to connect to " + URI);
-    client.connect().then(() => {
-        _isConnected = true;
-        console.log("Connected to MongoDB");
-    }).catch((err) => {
-        console.log(err);
-        console.error("Failed to connect to MongoDB");
-        process.exit(1);
-    });
+console.log("Attempting to connect to " + uri);
+if (process.env.NODE_ENV === "development") {
+    // In development mode, use a global variable so that the value
+    // is preserved across module reloads caused by HMR (Hot Module Replacement).
+    if (!(global as any)._mongoClientPromise) {
+        client = new MongoClient(uri);
+        (global as any)._mongoClientPromise = client.connect();
+    }
+    clientPromise = (global as any)._mongoClientPromise;
+} else {
+    client = new MongoClient(uri);
+    clientPromise = client.connect();
 }
 
 export async function close() {
-    _isConnected = false;
     return client.close();
 }
 
-export const isConnected = () => _isConnected;
-
-export const database = () => client.db(process.env.MONGO_DB);
+export const database = async () => (await clientPromise).db(process.env.MONGO_DB);
 
 const mongo = {
-    connect,
     close,
-    isConnected,
     database
 }
 

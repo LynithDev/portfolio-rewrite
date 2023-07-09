@@ -10,6 +10,7 @@
     "setup:populate": "node ./scripts/populate_blog.js"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^1.0.0",
     "@heroicons/react": "^2.0.18",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",

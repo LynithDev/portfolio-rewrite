@@ -4,9 +4,10 @@ import { getServerSession } from "next-auth";
 import { getProviders, signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import ProviderButton from "./ProviderButton";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export default async function LoginPage() {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
 
     if (session && session.user) {
         return redirect("/account");

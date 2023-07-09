@@ -7,6 +7,7 @@ import { CurrencyDollarIcon, Bars3BottomLeftIcon, UserIcon } from "@heroicons/re
 import ThemeSwitcher from "./ThemeSwitcher";
 import { Animate, Button } from "./base";
 import { useMotionValueEvent, useScroll } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 const links: [string, string][] = [
     ["Home", "/"],
@@ -29,8 +30,12 @@ function NavbarLink({ href, name }: { href: string, name: string }) {
 }
 
 function AccountButton({ className }: { className?: string }) {
+    const session = useSession();
+
+    let link = session.status == "authenticated" ? "/account" : "/login";
+
     return (
-        <Button link="/account" buttonStyle="invert" className={`px-sm ${className}`}>
+        <Button link={link} buttonStyle="invert" className={`px-sm ${className}`}>
             <UserIcon className="w-5 pointer-events-none" />
         </Button>
     )

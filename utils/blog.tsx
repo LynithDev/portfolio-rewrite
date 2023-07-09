@@ -92,9 +92,8 @@ export const convertTitleToURLFormat = (title: string): string => {
 }
 
 export const getBlogs = async (filters?: BlogFilters) => {
-    if (!mongo.isConnected()) await mongo.connect();
 
-    const blog = mongo.database().collection<BlogPost>("blogs");
+    const blog = (await mongo.database()).collection<BlogPost>("blogs");
 
     const { from, to, ...rest } = filters ?? {};
 
@@ -123,10 +122,8 @@ export const getBlogData = async (blog: WithId<BlogPost>) => {
     }
 }
 
-export const updateBlogPost = (id: ObjectId, update: Partial<BlogPost>) => {
-    if (!mongo.isConnected()) mongo.connect();
-
-    const blog = mongo.database().collection<BlogPost>("blogs").findOneAndUpdate({
+export const updateBlogPost = async (id: ObjectId, update: Partial<BlogPost>) => {
+    const blog = (await mongo.database()).collection<BlogPost>("blogs").findOneAndUpdate({
         _id: id
     }, {
         $set: update
