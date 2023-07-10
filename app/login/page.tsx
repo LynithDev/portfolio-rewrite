@@ -3,10 +3,10 @@ import TextInput from "@/components/base/TextInput";
 import { getServerSession } from "next-auth";
 import { getProviders, signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
-import ProviderButton from "./ProviderButton";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import LoginForm from "./LoginForm";
 
-export default async function LoginPage() {
+export default async function LoginPage(props: { searchParams?: { error?: string } }) {
     const session = await getServerSession(authOptions);
 
     if (session && session.user) {
@@ -15,34 +15,24 @@ export default async function LoginPage() {
 
     const providers = await getProviders();
 
+    const errors = {
+        "Default": "An error occurred while logging in.",
+        "Configuration": "This is a server error! Please contact me!",
+        "AccessDenied": "You do not have access to this page.",
+        "Verification": "This token has expired or has already been used.",
+        "OAuthSignin": "Could not sign in with OAuth provider.",
+        "OAuthCallback": "Could not retrieve OAuth callback.",
+        "OAuthCreateAccount": "Could not create an account with this OAuth provider.",
+        "EmailCreateAccount": "Could not create an account with this email.",
+        "Callback": "Could not retrieve callback.",
+        "OAuthAccountNotLinked": "Could not link OAuth account.",
+        "EmailSignin": "Could not sign in with email.",
+        "CredentialsSignin": "Could not sign in with credentials.",
+        "CredentialsCreateAccount": "Could not create an account with credentials.",
+        "SessionRequired": "Session required.",
+    }
+
     return (
-        <Section fullView className="md:items-center md:justify-center">
-            <div className="max-w-content w-full h-full flex flex-col justify-center items-start gap-2 mt-half-page md:mt-0">
-                <Header size="lg">Login</Header>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus explicabo velit debitis, doloremque cum sequi error, nihil inventore quia ad quaerat. In obcaecati explicabo quae. Dolor enim iure accusantium blanditiis.</p>
-                <div className="relative flex flex-col w-full md:flex-row gap-8 ">
-                    <form action="" className="w-full flex flex-col gap-y-2">
-                        <Header size="sm" className="mt-md">Username</Header>
-                        <TextInput placeholder="Username" />
-
-                        <Header size="sm" className="mt-md">Password</Header>
-                        <TextInput placeholder="Password" type="password" />
-
-                        <div className="flex flex-row w-full md:w-auto">
-                            <Button type="submit" className="mt-md w-full md:w-auto">Login</Button>
-                        </div>
-                    </form>
-                    <span className="flex mx-auto dark:bg-white bg-black bg-opacity-10 dark:bg-opacity-10 md:w-0.5 md:h-5/6 w-5/6 h-0.5"></span>
-                    <div className="w-full flex flex-col gap-y-2">
-                        <Header size="sm" className="md:mt-md">Or login with</Header>
-                        {/* <div className="w-full flex flex-col gap-y-2"> */}
-                            {Object.values(providers ?? []).map(provider => (
-                                <ProviderButton key={provider.name} id={provider.id} name={provider.name} />
-                            ))}
-                        {/* </div> */}
-                    </div>
-                </div>
-            </div>
-        </Section>
+        <LoginForm providers={providers as any} error={(errors as any)[props.searchParams?.error ?? ""]} />
     )
 }

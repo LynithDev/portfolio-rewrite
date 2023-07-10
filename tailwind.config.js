@@ -27,7 +27,8 @@ module.exports = {
             },
 
             black: "#302B2B",
-            white: "#FFF2F2"
+            white: "#FFF2F2",
+            danger: "#ff0000"
         },
         borderRadius: {
             "none": "0",
