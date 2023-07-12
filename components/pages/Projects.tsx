@@ -15,7 +15,7 @@ async function getData() {
     }
 }
 
-function ProjectCard(props: Project) {
+function ProjectCard(props: Project & { delay: number }) {
     let description = props.description ?? "";
 
     if (description.length > 80) {
@@ -27,7 +27,7 @@ function ProjectCard(props: Project) {
     }
 
     return ( 
-        <Animate animations={["fade", "slide"]} className="lg:w-1/3 relative md:w-[calc(50%-theme(margin.xs)*2)] w-full lg:max-w-project-max min-w bg-white dark:bg-primary-dark p-sm rounded-lg flex flex-col justify-between">
+        <Animate animations={["fade", "slide"]} delay={props.delay * 0.08} className="lg:w-1/3 relative md:w-[calc(50%-theme(margin.xs)*2)] w-full lg:max-w-project-max min-w bg-white dark:bg-primary-dark p-sm rounded-lg flex flex-col justify-between">
             <div className="absolute flex flex-row p-xs m-xs rounded-md bg-primary dark:bg-primary-dark">
                 {props.icons}
             </div>
@@ -73,7 +73,7 @@ export async function Projects(props: ComponentProps<"div">) {
                 const svgIcons = iconCache().filter((icon) => project.icons.includes(icon.key as any));
 
                 return (
-                    <ProjectCard key={key} {...project} icons={svgIcons as any} />
+                    <ProjectCard key={key} delay={key} {...project} icons={svgIcons as any} />
                 )})}
         </div>
     )

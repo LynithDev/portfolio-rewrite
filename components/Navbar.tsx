@@ -16,6 +16,17 @@ const links: [string, string][] = [
     ["Tools", "/tools"],
 ]
 
+let navbarEntryIndex = 0;
+
+function NavbarEntry({ children, className }: { children: ReactElement, className?: string }) {
+    navbarEntryIndex++;
+    return (
+        <Animate animations={["slide", "fade"]} delay={navbarEntryIndex * 0.05} className={className}>
+            {children}
+        </Animate>
+    )
+}
+
 function NavbarLink({ href, name }: { href: string, name: string }) {
     const pathname = usePathname();
 
@@ -25,7 +36,9 @@ function NavbarLink({ href, name }: { href: string, name: string }) {
     else if (pathname.startsWith(href) && pathname != "/" && href != "/") active = "text-accent";
 
     return (
-        <Link href={href} scroll={false} className={`${active} md:text-base text-xl p-sm m-sm hover:text-accent/90`}>{name}</Link>
+        <NavbarEntry className="p-sm">
+            <Link href={href} scroll={false} className={`${active} md:text-base text-xl p-sm hover:text-accent/90`}>{name}</Link>
+        </NavbarEntry>
     )
 }
 
@@ -35,9 +48,11 @@ function AccountButton({ className }: { className?: string }) {
     let link = session.status == "authenticated" ? "/account" : "/login";
 
     return (
-        <Button link={link} buttonStyle="invert" className={`px-sm ${className}`}>
-            <UserIcon className="w-5 pointer-events-none" />
-        </Button>
+        <NavbarEntry>
+            <Button link={link} buttonStyle="invert" className={`px-sm ${className}`}>
+                <UserIcon className="w-5 pointer-events-none" />
+            </Button>
+        </NavbarEntry>
     )
 }
 
@@ -102,10 +117,14 @@ export default function Navbar() {
 
                     <div className="flex md:flex-row flex-col flex-1 justify-end md:items-center items-start">
                         <div className="flex flex-row">
-                            <ThemeSwitcher className="mr-xs" />
+                            <NavbarEntry>
+                                <ThemeSwitcher className="mr-xs" />
+                            </NavbarEntry>
                             <AccountButton className="mr-xs" />
                         </div>
-                        <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/lynith"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
+                        <NavbarEntry>
+                            <Button className="md:mt-0 mt-sm" link="https://ko-fi.com/lynith"><CurrencyDollarIcon className="flex-grow mr-xs w-5" /> Commission</Button>
+                        </NavbarEntry>
                     </div>
                 </Animate>
             </nav>

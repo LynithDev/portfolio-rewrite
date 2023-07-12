@@ -13,7 +13,7 @@ async function getData() {
 
 function FooterColumn({ children, header }: PropsWithChildren<{ header: string }>) {
     return (
-        <div className="flex flex-col justify-start items-start mb-md last:mb-0 md:mb-0">
+        <div className="flex flex-col justify-start items-start">
             <Header size="sm">{header}</Header>
             <div className="flex flex-col justify-start items-start pl-xs">
                 {children}
@@ -36,8 +36,8 @@ export default async function Footer() {
     return (
         <footer className="bg-secondary-dark">
             <div className="dark:bg-secondary-dark bg-secondary p-xl dark:text-white text-black">
-                <div className="max-w-content mx-auto flex flex-col md:flex-row md:justify-between justify-center md:items-start items-center">
-                    <FooterColumn header="Socials">
+                <div className="max-w-content mx-auto flex flex-row justify-between md:items-start">
+                    <FooterColumn header="Socials"> 
                         {socials.map((social, index) => (
                             <HyperLink href={social[1]} key={index}>{social[0]}</HyperLink>
                         ))}
